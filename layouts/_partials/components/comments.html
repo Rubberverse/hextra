@@ -1,11 +1,17 @@
-{{- $enableComments := site.Params.comments.enable | default false -}}
+{{- $enableComments := false -}}
 
-{{ if not (eq .Params.comments nil) }}
+{{ if and (isset site.Params "comments") (isset site.Params.comments "enable") }}
+  {{ $enableComments = site.Params.comments.enable }}
+{{ end }}
+
+{{- if not (eq .Params.comments nil) -}}
   {{ $enableComments = .Params.comments }}
 {{ end }}
 
 {{- if $enableComments -}}
-  {{- if eq site.Params.comments.type "giscus" -}}
+  {{- if eq site.Params.comments.type "commentario" -}}
+    {{ partial "components/commentario.html" . }}
+  {{- else if eq site.Params.comments.type "giscus" -}}
     {{ partial "components/giscus.html" . }}
-  {{- end -}}
+  {{- end - }}
 {{- end -}}
