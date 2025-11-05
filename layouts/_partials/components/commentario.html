@@ -1,0 +1,10 @@
+{{- $lang := site.Language.LanguageCode | default "en" -}}
+{{- $script := site.Params.comments.scriptUrl -}}
+
+<script src="{{ $script }}" async></script>
+<comentario-comments    auto-init="true"
+                        lang="{{ $lang }}"
+                        live-update="true"
+                        max-level="3"
+                        theme="dark">
+</comentario-comments>
